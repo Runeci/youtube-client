@@ -8,9 +8,9 @@ describe('PodcastPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PodcastPageComponent ]
+      declarations: [PodcastPageComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

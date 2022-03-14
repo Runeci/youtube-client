@@ -1,1 +1,21 @@
-<p>podcast-item works!</p>
+<div class="podcast-item">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Podcast {{ podcastItem.snippet.title }}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image
+         [src]="podcastItem.snippet.thumbnails.default.url"
+         [alt]="podcastItem.snippet.title">
+    <mat-card-content></mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">MORE</button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <mat-progress-bar></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</div>
+
+
+
+

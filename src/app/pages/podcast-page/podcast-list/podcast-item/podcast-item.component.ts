@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { PodcastItem } from '../../../../core /models/podcast-item.typing';
 
 @Component({
   selector: 'app-podcast-item',
   templateUrl: './podcast-item.component.html',
-  styleUrls: ['./podcast-item.component.scss']
+  styleUrls: ['./podcast-item.component.scss'],
 })
-export class PodcastItemComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class PodcastItemComponent {
+  @Input() public podcastItem: PodcastItem;
 }

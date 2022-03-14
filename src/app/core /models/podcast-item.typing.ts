@@ -26,7 +26,7 @@ type PodcastThumbnail = {
   url: string,
   height: number,
   width: number
-}
+};
 
 enum PodcastThumbnails {
   Default = 'default',
@@ -36,10 +36,10 @@ enum PodcastThumbnails {
   Maxres = 'maxres',
 }
 
-type PodcastLocalised =  {
+type PodcastLocalised = {
   title: string,
   description: string,
-}
+};
 
 type PodcastStatistics = {
   viewCount: string,
@@ -47,6 +47,4 @@ type PodcastStatistics = {
   dislikeCount: string,
   favoriteCount: string,
   commentCount: string,
-}
-
-
+};
