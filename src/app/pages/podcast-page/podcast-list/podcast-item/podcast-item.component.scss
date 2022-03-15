@@ -10,3 +10,21 @@
   display: flex;
   justify-content: center;
 }
+
+.mat-card-content {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.card-content-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: default;
+
+  .mat-icon:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+}
