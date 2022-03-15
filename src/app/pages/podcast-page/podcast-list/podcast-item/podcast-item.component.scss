@@ -28,3 +28,24 @@
     cursor: pointer;
   }
 }
+
+.mat-progress-bar.red {
+  ::ng-deep .mat-progress-bar-buffer {
+    background: indianred;
+  }
+}
+
+.mat-progress-bar.green {
+  ::ng-deep .mat-progress-bar-buffer {
+    background: darkseagreen;
+  }
+}
+
+.mat-progress-bar.blue {
+  ::ng-deep .mat-progress-bar-buffer {
+    background: #3f51b5;
+  }
+}
+
+
+
