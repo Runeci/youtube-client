@@ -1,1 +1,7 @@
-<p>podcast-list works!</p>
+<div class="podcast-list">
+  <app-podcast-item
+    *ngFor="let podcast of podcastList"
+    [podcastItem]="podcast"
+  ></app-podcast-item>
+</div>
+
