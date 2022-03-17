@@ -309,7 +309,7 @@ export const podcasts = {
       etag: '"Fznwjl6JEQdo1MGvHOGaz_YanRU/_99tEunMszVYvCj2-1aUTKgOoSY"',
       id: 'm0yGx2MGZWg',
       snippet: {
-        publishedAt: '2018-05-13T07:44:08.000Z',
+        publishedAt: '2022-03-16T07:44:08.000Z',
         channelId: 'UCe_H8hzx9WV7Ca7Ps5gt72Q',
         title: 'Что такое Angular. Обзор возможностей',
         description: 'В этом видео речь пойдет про javascript фреймворк Angular. Я расскажу что такое Angular, где и когда его применяют, а так же сделаю небольшой обзор его возможностей. Расскажу чем фреймворк сложен для новичков и чем он действительно хорош для новых проектов. Сейчас для того что б стать junior javascript разработчиком нужно обязательно знать хотя бы один фреймворк js и ангуляр будет отличным выбором.',

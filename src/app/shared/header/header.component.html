@@ -1,18 +1,36 @@
 <mat-toolbar class="header" color="primary">
-  <span class="logo">MyYoutube</span>
-  <div class="header-main">
-    <app-search></app-search>
+  <mat-toolbar-row class="header-first-row">
+    <span class="logo">MyYoutube</span>
+    <div class="header-main">
+      <div class="search">
+        <mat-form-field class="search-input" appearance="fill">
+          <input matInput [(ngModel)]="searchValue" type="text" placeholder="Search">
+        </mat-form-field>
+        <div class="search-btn">
+          <button mat-raised-button color="accent" (click)="onSearch(searchValue)">Search</button>
+        </div>
+      </div>
+
+      <div class="auth-button-container">
+        <button mat-button>
+          <mat-icon
+            class="settings"
+            aria-hidden="false"
+            (click)="toggleFilters()">tune</mat-icon>
+        </button>
+      </div>
+    </div>
     <div class="auth-button-container">
       <button mat-button class="auth-btn">
-        <mat-icon class="settings" aria-hidden="false">tune</mat-icon>
+        <mat-icon>account_circle</mat-icon>
       </button>
     </div>
-  </div>
-  <div class="auth-button-container">
-    <button mat-button class="auth-btn">
-      <mat-icon>account_circle</mat-icon>
-    </button>
-  </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row  class="header-second-row" *ngIf="filterBarIsShown">
+    <app-filter [podcasts]="podcasts"></app-filter>
+  </mat-toolbar-row>
 </mat-toolbar>
+
+
 
 

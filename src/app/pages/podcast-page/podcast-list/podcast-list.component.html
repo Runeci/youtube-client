@@ -1,7 +1,8 @@
-<div class="podcast-list">
+<div
+  class="podcast-list"
+  *ngIf="true">
   <app-podcast-item
-    *ngFor="let podcast of podcastList"
     [podcastItem]="podcast"
-  ></app-podcast-item>
+    *ngFor="let podcast of podcasts"></app-podcast-item>
 </div>
 

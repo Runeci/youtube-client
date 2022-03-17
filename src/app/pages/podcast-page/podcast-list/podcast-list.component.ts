@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { podcasts } from '../../../core /mocks/response';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { PodcastItem } from '../../../core /models/podcast-item.typing';
 
 @Component({
@@ -8,5 +8,9 @@ import { PodcastItem } from '../../../core /models/podcast-item.typing';
   styleUrls: ['./podcast-list.component.scss'],
 })
 export class PodcastListComponent {
-  public podcastList: PodcastItem[] = podcasts.items;
+  @Input() podcasts: PodcastItem[];
+
+  constructor(route: ActivatedRoute) {
+    route.queryParams.subscribe((p) => console.log(p['button'])); // you can also do this in ngOnInit
+  }
 }

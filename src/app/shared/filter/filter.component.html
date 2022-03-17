@@ -1,1 +1,14 @@
-<p>filter works!</p>
+<div class="filters" [ngSwitch]="sortVal">
+  <span>Sorting by:</span>
+  <div class="date-filter filter" (click)="sortByDate(podcasts)">
+    <span>Date</span>
+    <mat-icon *ngSwitchCase="'dateIncr'">arrow_upward</mat-icon>
+    <mat-icon *ngSwitchCase="'dateDecr'">arrow_downward</mat-icon>
+  </div>
+  <div class="views-filter filter" (click)="sortByViews(podcasts)">
+    <span>View</span>
+    <mat-icon *ngSwitchCase="'viewIncr'">arrow_upward</mat-icon>
+    <mat-icon *ngSwitchCase="'viewDecr'">arrow_downward</mat-icon>
+  </div>
+</div>
+

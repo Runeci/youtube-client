@@ -1,1 +1,9 @@
-<p>podcast-page works!</p>
+<div class="podcast-page">
+  <app-header
+    (searchClicked)="initListLoad()"
+    [podcasts]="podcastsArr"
+  ></app-header>
+  <app-podcast-list
+    *ngIf="isLoaded"
+    [podcasts]="podcastsArr"></app-podcast-list>
+</div>
