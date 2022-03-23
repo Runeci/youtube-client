@@ -3,10 +3,9 @@ import {
   EventEmitter,
   OnInit,
   Output,
-  Input,
 } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { PodcastItem } from '../../core /models/podcast-item.typing';
+import { SortEvent } from '../filter/filter.component';
 
 @Component({
   selector: 'app-header',
@@ -14,15 +13,17 @@ import { PodcastItem } from '../../core /models/podcast-item.typing';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  @Output() public searchClicked: EventEmitter<void> = new EventEmitter();
+
+  @Output() public sort: EventEmitter<SortEvent> = new EventEmitter();
+
+  @Output() public search: EventEmitter<string> = new EventEmitter();
+
   public filterBarIsShown = false;
 
   public searchValue: string;
 
   public podcastIsShown = false;
-
-  @Input() public podcasts: PodcastItem[];
-
-  @Output() public searchClicked: EventEmitter<void> = new EventEmitter();
 
   constructor(private router: Router, private route: ActivatedRoute) {
   }

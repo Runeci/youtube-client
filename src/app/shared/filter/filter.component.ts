@@ -1,65 +1,63 @@
-import { Component, Input } from '@angular/core';
-import { PodcastItem } from '../../core /models/podcast-item.typing';
+import { Component, EventEmitter, Output } from '@angular/core';
+
+export enum SortDirection {
+    Asc = 'ASC',
+    Desc = 'DESC',
+}
+
+export enum SortFields {
+    Date = 'date',
+    Count = 'count',
+}
+
+export interface SortEvent {
+    direction: SortDirection | null,
+    field: SortFields,
+}
 
 @Component({
-  selector: 'app-filter',
-  templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss'],
+    selector: 'app-filter',
+    templateUrl: './filter.component.html',
+    styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent {
-  @Input() public podcasts: PodcastItem[];
+    @Output() public filterSearchInput = new EventEmitter<string>();
 
-  public sortVal = '';
+    @Output() public sort: EventEmitter<SortEvent> = new EventEmitter();
 
-  public sortByDate(podcastArr: PodcastItem[]): void {
-    if (!this.sortVal || this.sortVal !== 'dateIncr') {
-      this.sortVal = 'dateIncr';
-      this.sortDateIncr(podcastArr);
-    } else if (this.sortVal === 'dateIncr') {
-      this.sortVal = 'dateDecr';
-      this.sortDateDecr(podcastArr);
+    public sortSettings: SortEvent = {
+        direction: null,
+        field: SortFields.Date,
+    };
+
+    public sortFields: typeof SortFields = SortFields;
+
+    public sortDirections: typeof SortDirection = SortDirection;
+
+    public searchVal = '';
+
+    public sortChanges(sortField: SortFields): void {
+        let newDirection;
+
+        switch (this.sortSettings.direction) {
+            case SortDirection.Asc:
+                newDirection = SortDirection.Desc;
+                break;
+            case SortDirection.Desc:
+                newDirection = null;
+                break;
+            case null:
+                newDirection = SortDirection.Asc;
+                break;
+            default:
+                newDirection = null;
+                break;
+        }
+
+        this.sortSettings = {
+            field: sortField,
+            direction: newDirection,
+        };
+        this.sort.emit(this.sortSettings);
     }
-  }
-
-  public sortByViews(podcastArr: PodcastItem[]): void {
-    if (!this.sortVal || this.sortVal !== 'viewIncr') {
-      this.sortVal = 'viewIncr';
-      this.sortViewsIncr(podcastArr);
-    } else if (this.sortVal === 'viewIncr') {
-      this.sortVal = 'viewDecr';
-      this.sortViewsDecr(podcastArr);
-    }
-  }
-
-  private sortDateIncr(podcastArr: PodcastItem[]): void {
-    podcastArr.sort((a, b) => {
-      const prevVal = +new Date(a.snippet.publishedAt);
-      const nextVal = +new Date(b.snippet.publishedAt);
-      return nextVal - prevVal;
-    });
-  }
-
-  private sortDateDecr(podcastArr: PodcastItem[]): void {
-    podcastArr.sort((a, b) => {
-      const prevVal = +new Date(a.snippet.publishedAt);
-      const nextVal = +new Date(b.snippet.publishedAt);
-      return prevVal - nextVal;
-    });
-  }
-
-  private sortViewsIncr(podcastArr: PodcastItem[]): void {
-    podcastArr.sort((a, b) => {
-      const prevVal = +a.statistics.viewCount;
-      const nextVal = +b.statistics.viewCount;
-      return nextVal - prevVal;
-    });
-  }
-
-  private sortViewsDecr(podcastArr: PodcastItem[]): void {
-    podcastArr.sort((a, b) => {
-      const prevVal = +a.statistics.viewCount;
-      const nextVal = +b.statistics.viewCount;
-      return prevVal - nextVal;
-    });
-  }
 }

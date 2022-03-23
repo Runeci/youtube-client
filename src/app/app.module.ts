@@ -17,6 +17,7 @@ import { PodcastItemComponent } from './pages/podcast-page/podcast-list/podcast-
 import { FilterComponent } from './shared/filter/filter.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FilterPipe } from './pages/podcast-page/filter-pipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AppRoutingModule } from './app-routing.module';
     PodcastPageComponent,
     FilterComponent,
     HeaderComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
