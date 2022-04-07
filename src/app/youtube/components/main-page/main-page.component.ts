@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PodcastItem } from '../../models/podcast-item.typing';
 import { podcasts } from '../../../core /mocks/response';
 import { SortDirection, SortEvent, SortFields } from '../../../shared/filter/filter.component';
@@ -8,25 +8,12 @@ import { SortDirection, SortEvent, SortFields } from '../../../shared/filter/fil
     templateUrl: './main-page.component.html',
     styleUrls: ['./main-page.component.scss'],
 })
-export class MainPageComponent implements OnInit {
+export class MainPageComponent {
     public isLoaded: boolean;
 
     public podcastsArr: PodcastItem[] = podcasts.items;
 
     public search: string = '';
-
-    initListLoad(): boolean {
-        this.isLoaded = true;
-        return this.isLoaded;
-    }
-
-    public onSearch(searchText: string): void {
-        this.search = searchText;
-    }
-
-    ngOnInit() {
-        console.log('hhi');
-    }
 
     public onSort(sortEvent: SortEvent): void {
         if (sortEvent.direction === null) {

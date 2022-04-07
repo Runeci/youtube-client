@@ -1,61 +1,48 @@
 import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
+    Component,
+    EventEmitter,
+    OnInit,
+    Output,
 } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SortEvent } from '../../../shared/filter/filter.component';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  @Output() public searchClicked: EventEmitter<void> = new EventEmitter();
+    @Output() public searchClicked: EventEmitter<void> = new EventEmitter();
 
-  @Output() public sort: EventEmitter<SortEvent> = new EventEmitter();
+    @Output() public sort: EventEmitter<SortEvent> = new EventEmitter();
 
-  @Output() public search: EventEmitter<string> = new EventEmitter();
+    @Output() public search: EventEmitter<string> = new EventEmitter();
 
-  public filterBarIsShown = false;
+    public filterBarIsShown = false;
 
-  public searchValue: string;
+    public searchValue: string;
 
-  public podcastIsShown = false;
+    public podcastIsShown = false;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
-  }
+    constructor(private router: Router, private route: ActivatedRoute) {
+    }
 
-  public ngOnInit() {
-    this.route.queryParams
-      .subscribe((p) => {
-        this.searchValue = p['search'];
-      });
-  }
+    public ngOnInit() {
+        this.route.queryParams
+            .subscribe((p) => {
+                this.searchValue = p['search'];
+            });
+    }
 
-  public changeQuery() {
-    const queryParams: Params = { search: this.searchValue, button: this.searchClicked };
+    public onSearch(value: string): void {
+        this.searchClicked.emit();
 
-    this.router.navigate(
-      [],
-      {
-        queryParams,
-        queryParamsHandling: 'merge',
-      },
-    );
-  }
+        this.searchValue = value;
+        this.podcastIsShown = true;
+    }
 
-  public onSearch(value: string): void {
-    // this.changeQuery();
-    this.searchClicked.emit();
-
-    this.searchValue = value;
-    this.podcastIsShown = true;
-  }
-
-  toggleFilters() {
-    this.filterBarIsShown = !this.filterBarIsShown;
-  }
+    toggleFilters() {
+        this.filterBarIsShown = !this.filterBarIsShown;
+    }
 }

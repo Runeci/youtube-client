@@ -1,19 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PodcastListComponent } from './youtube/components/main-page/podcast-list/podcast-list.component';
+import { PageNotFoundComponent } from './youtube/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-    { path: 'list', component: PodcastListComponent },
     {
-        path: 'youtube',
+        path: '',
         loadChildren: () => import('./youtube/youtube.module')
             .then((m) => m.YoutubeModule),
     },
-    {
-        path: 'orders',
-        loadChildren: () => import('./youtube/youtube.module')
-            .then((m) => m.YoutubeModule),
-    },
+
+    { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 ];
 
 @NgModule({
