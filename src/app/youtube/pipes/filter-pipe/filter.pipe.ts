@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { PodcastItem } from '../../../core /models/podcast-item.typing';
+import { PodcastItem } from '../../models/podcast-item.typing';
 
 @Pipe({
     name: 'filter',

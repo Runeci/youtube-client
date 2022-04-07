@@ -5,7 +5,7 @@ import {
   Output,
 } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { SortEvent } from '../filter/filter.component';
+import { SortEvent } from '../../../shared/filter/filter.component';
 
 @Component({
   selector: 'app-header',
