@@ -1,6 +1,6 @@
 <mat-toolbar class="header" color="primary">
   <mat-toolbar-row class="header-first-row">
-    <span class="logo">My Youtube</span>
+    <span class="logo" routerLink="">My Youtube</span>
     <div class="header-main">
       <div class="search">
         <mat-form-field class="search-input" appearance="fill">
@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <div class="auth-button-container">
+      <div class="auth-button-container" *ngIf="showFiltersButton">
         <button mat-button>
           <mat-icon
             class="settings"
@@ -27,7 +27,7 @@
     </div>
   </mat-toolbar-row>
   <mat-toolbar-row  class="header-second-row" *ngIf="filterBarIsShown">
-    <app-filter (sort)="sort.emit($event)" (filterSearchInput)="search.emit($event)"></app-filter>
+    <app-filter></app-filter>
   </mat-toolbar-row>
 </mat-toolbar>
 

@@ -26,7 +26,11 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary">MORE</button>
+      <button
+          mat-raised-button
+          color="primary"
+          (click)="goDetails(podcastItem.id)"
+      >MORE</button>
     </mat-card-actions>
     <mat-card-footer>
       <mat-progress-bar

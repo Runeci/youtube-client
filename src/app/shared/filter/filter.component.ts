@@ -1,18 +1,17 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+    Component,
+    OnInit,
+} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export enum SortDirection {
     Asc = 'ASC',
     Desc = 'DESC',
 }
 
-export enum SortFields {
-    Date = 'date',
-    Count = 'count',
-}
-
 export interface SortEvent {
     direction: SortDirection | null,
-    field: SortFields,
+    field: string | null,
 }
 
 @Component({
@@ -20,23 +19,38 @@ export interface SortEvent {
     templateUrl: './filter.component.html',
     styleUrls: ['./filter.component.scss'],
 })
-export class FilterComponent {
-    @Output() public filterSearchInput = new EventEmitter<string>();
-
-    @Output() public sort: EventEmitter<SortEvent> = new EventEmitter();
-
+export class FilterComponent implements OnInit {
     public sortSettings: SortEvent = {
         direction: null,
-        field: SortFields.Date,
+        field: null,
     };
 
-    public sortFields: typeof SortFields = SortFields;
+    public sortFields: string[];
 
     public sortDirections: typeof SortDirection = SortDirection;
 
     public searchVal = '';
 
-    public sortChanges(sortField: SortFields): void {
+    constructor(
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+    ) {
+    }
+
+    public ngOnInit(): void {
+        const { snapshot } = this.getRouteLastChild(this.activatedRoute);
+        this.initFilters(snapshot.data['filterConfig'].sortFields);
+        const [field = null, direction = null] = (snapshot.queryParams['sort'] || '').split(',');
+        this.sortSettings = { direction, field };
+
+        this.searchVal = snapshot.queryParams['search'] || '';
+    }
+
+    public initFilters(sortFields: string[]): void {
+        this.sortFields = sortFields;
+    }
+
+    public sortChanges(sortField: string): void {
         let newDirection;
 
         switch (this.sortSettings.direction) {
@@ -58,6 +72,32 @@ export class FilterComponent {
             field: sortField,
             direction: newDirection,
         };
-        this.sort.emit(this.sortSettings);
+
+        this.router.navigate([], {
+            queryParams: {
+                sort: this.sortSettings.direction === null
+                    ? null
+                    : `${this.sortSettings.field},${this.sortSettings.direction}`,
+            },
+            queryParamsHandling: 'merge',
+        });
+    }
+
+    public onSearch(): void {
+        this.router.navigate([], {
+            queryParams: {
+                search: this.searchVal,
+            },
+            queryParamsHandling: 'merge',
+        });
+    }
+
+    private getRouteLastChild(activatedRoute: ActivatedRoute): ActivatedRoute {
+        let route = activatedRoute;
+
+        while (route.firstChild) {
+            route = route.firstChild;
+        }
+        return route;
     }
 }

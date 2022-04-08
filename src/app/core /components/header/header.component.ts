@@ -4,7 +4,8 @@ import {
     OnInit,
     Output,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { filter, map } from 'rxjs';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { SortEvent } from '../../../shared/filter/filter.component';
 
 @Component({
@@ -15,23 +16,36 @@ import { SortEvent } from '../../../shared/filter/filter.component';
 export class HeaderComponent implements OnInit {
     @Output() public searchClicked: EventEmitter<void> = new EventEmitter();
 
-    @Output() public sort: EventEmitter<SortEvent> = new EventEmitter();
-
-    @Output() public search: EventEmitter<string> = new EventEmitter();
-
     public filterBarIsShown = false;
 
     public searchValue: string;
 
     public podcastIsShown = false;
 
-    constructor(private router: Router, private route: ActivatedRoute) {
+    public showFiltersButton: boolean = false;
+
+    constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     }
 
     public ngOnInit() {
-        this.route.queryParams
+        this.activatedRoute.queryParams
             .subscribe((p) => {
                 this.searchValue = p['search'];
+            });
+
+        this.router.events
+            .pipe(
+                // @ts-ignore
+                filter((event) => event instanceof NavigationEnd),
+                map((event: NavigationEnd) => event.urlAfterRedirects || event.url),
+                map(() => this.getRouteLastChild(this.activatedRoute)),
+            )
+            .subscribe(({ snapshot }: ActivatedRoute) => {
+                this.showFiltersButton = !!snapshot.data['filterConfig'];
+
+                if (!this.showFiltersButton) {
+                    this.filterBarIsShown = false;
+                }
             });
     }
 
@@ -44,5 +58,14 @@ export class HeaderComponent implements OnInit {
 
     toggleFilters() {
         this.filterBarIsShown = !this.filterBarIsShown;
+    }
+
+    private getRouteLastChild(activatedRoute: ActivatedRoute): ActivatedRoute {
+        let route = activatedRoute;
+
+        while (route.firstChild) {
+            route = route.firstChild;
+        }
+        return route;
     }
 }

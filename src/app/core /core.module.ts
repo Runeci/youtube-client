@@ -6,6 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 
 import { FilterComponent } from '../shared/filter/filter.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -22,6 +23,7 @@ import { HeaderComponent } from './components/header/header.component';
         FormsModule,
         MatIconModule,
         MatButtonModule,
+        RouterModule,
     ],
     exports: [
         HeaderComponent,
