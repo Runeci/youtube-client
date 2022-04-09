@@ -1,0 +1,40 @@
+<mat-card>
+    <img
+        mat-card-image
+        [src]="podcast.snippet.thumbnails.high.url"
+        [alt]="podcast.snippet.title"
+    >
+    <div class="card-content">
+        <div class="card-description">
+            <mat-card-title-group>
+                <mat-card-title>{{ podcast.snippet.title }}</mat-card-title>
+                <mat-card-subtitle>{{ podcast.snippet.publishedAt | date: 'fullDate' }}</mat-card-subtitle>
+            </mat-card-title-group>
+            <mat-card-content>
+                <p style="font-weight: bold">Description:</p>
+                <p class="text">{{ podcast.snippet.localized.description }}</p>
+            </mat-card-content>
+        </div>
+        <div class="card-actions">
+            <div class="views card-content-item">
+                <mat-icon>visibility</mat-icon>
+                <span>{{ podcast.statistics.viewCount }}</span>
+            </div>
+            <div class="likes card-content-item">
+                <mat-icon>favorite</mat-icon>
+                <span>{{ podcast.statistics.favoriteCount }}</span>
+            </div>
+            <div class="dislikes card-content-item">
+                <mat-icon>thumb_down</mat-icon>
+                <span>{{ podcast.statistics.dislikeCount }}</span>
+            </div>
+            <div class="comments card-content-item">
+                <mat-icon>question_answer</mat-icon>
+                <span> {{ podcast.statistics.commentCount }}</span>
+            </div>
+        </div>
+<!--        <mat-card-footer>-->
+<!--            <mat-progress-bar></mat-progress-bar>-->
+<!--        </mat-card-footer>-->
+    </div>
+</mat-card>
