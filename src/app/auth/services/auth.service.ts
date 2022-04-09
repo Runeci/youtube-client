@@ -5,8 +5,6 @@ import { Router } from '@angular/router';
     providedIn: 'root',
 })
 export class AuthService {
-    public redirectUrl: string | null = null;
-
     constructor(private router: Router) {
     }
 
