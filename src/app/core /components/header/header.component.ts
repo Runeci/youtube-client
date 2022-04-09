@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { filter, map } from 'rxjs';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { SortEvent } from '../../../shared/filter/filter.component';
 
 @Component({
     selector: 'app-header',
@@ -28,11 +27,6 @@ export class HeaderComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.activatedRoute.queryParams
-            .subscribe((p) => {
-                this.searchValue = p['search'];
-            });
-
         this.router.events
             .pipe(
                 // @ts-ignore
