@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core /core.module';
 import { PageNotFoundComponent } from './youtube/pages/page-not-found/page-not-found.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { PageNotFoundComponent } from './youtube/pages/page-not-found/page-not-f
         FormsModule,
         AppRoutingModule,
         CoreModule,
+        MatIconModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

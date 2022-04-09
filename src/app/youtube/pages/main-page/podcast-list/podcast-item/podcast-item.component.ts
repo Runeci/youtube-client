@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { PodcastItem } from '../../../../models/podcast-item.typing';
 import { Router } from '@angular/router';
+import { PodcastItem } from '../../../../models/podcast-item.typing';
 
 @Component({
     selector: 'app-podcast-item',
