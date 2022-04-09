@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { filter, map } from 'rxjs';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -23,7 +24,11 @@ export class HeaderComponent implements OnInit {
 
     public showFiltersButton: boolean = false;
 
-    constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    constructor(
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        private authService: AuthService,
+    ) {
     }
 
     public ngOnInit() {
@@ -41,6 +46,10 @@ export class HeaderComponent implements OnInit {
                     this.filterBarIsShown = false;
                 }
             });
+    }
+
+    public onLogOut(): void {
+        this.authService.logOut();
     }
 
     public onSearch(value: string): void {

@@ -1,34 +1,36 @@
 <mat-toolbar class="header" color="primary">
-  <mat-toolbar-row class="header-first-row">
-    <span class="logo" routerLink="">My Youtube</span>
-    <div class="header-main">
-      <div class="search">
-        <mat-form-field class="search-input" appearance="fill">
-          <input matInput [(ngModel)]="searchValue" type="text" placeholder="Search">
-        </mat-form-field>
-        <div class="search-btn">
-          <button mat-raised-button color="accent" (click)="onSearch(searchValue)">Search</button>
-        </div>
-      </div>
+    <mat-toolbar-row class="header-first-row">
+        <span class="logo" routerLink="">My Youtube</span>
+        <div class="header-main">
+            <div class="search">
+                <mat-form-field class="search-input" appearance="fill">
+                    <input matInput [(ngModel)]="searchValue" type="text" placeholder="Search">
+                </mat-form-field>
+                <div class="search-btn">
+                    <button mat-raised-button color="accent" (click)="onSearch(searchValue)">Search</button>
+                </div>
+            </div>
 
-      <div class="auth-button-container" *ngIf="showFiltersButton">
-        <button mat-button>
-          <mat-icon
-            class="settings"
-            aria-hidden="false"
-            (click)="toggleFilters()">tune</mat-icon>
-        </button>
-      </div>
-    </div>
-    <div class="auth-button-container">
-      <button routerLink="/login" mat-button class="auth-btn">
-        <mat-icon>account_circle</mat-icon>
-      </button>
-    </div>
-  </mat-toolbar-row>
-  <mat-toolbar-row  class="header-second-row" *ngIf="filterBarIsShown">
-    <app-filter></app-filter>
-  </mat-toolbar-row>
+            <div class="auth-button-container" *ngIf="showFiltersButton">
+                <button mat-button>
+                    <mat-icon
+                        class="settings"
+                        aria-hidden="false"
+                        (click)="toggleFilters()">tune
+                    </mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="auth-button-container">
+            <button routerLink="/login" mat-button class="auth-btn">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+        </div>
+        <button mat-button (click)="onLogOut()">LogOut</button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="header-second-row" *ngIf="filterBarIsShown">
+        <app-filter></app-filter>
+    </mat-toolbar-row>
 </mat-toolbar>
 
 

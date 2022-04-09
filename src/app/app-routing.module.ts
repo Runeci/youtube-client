@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './youtube/pages/page-not-found/page-not-found.component';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
     {
         path: '',
+        canActivate: [AuthGuard],
         loadChildren: () => import('./youtube/youtube.module')
             .then((m) => m.YoutubeModule),
     },
