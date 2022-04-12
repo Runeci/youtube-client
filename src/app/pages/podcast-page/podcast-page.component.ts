@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { PodcastItem } from '../../core /models/podcast-item.typing';
-import { podcasts } from '../../core /mocks/response';
+import { PodcastItem } from '../../core/models/podcast-item.typing';
+import { podcasts } from '../../core/mocks/response';
 import { SortDirection, SortEvent, SortFields } from '../../shared/filter/filter.component';
 
 @Component({
