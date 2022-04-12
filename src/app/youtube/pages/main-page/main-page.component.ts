@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PodcastItem } from '../../models/podcast-item.typing';
-import { podcasts } from '../../../core /mocks/response';
+import { podcasts } from '../../../core/mocks/response';
 import { SortDirection, SortEvent } from '../../../shared/filter/filter.component';
 import { PodcastsService } from '../../services/podcasts.service';
 
