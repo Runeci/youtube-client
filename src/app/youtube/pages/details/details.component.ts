@@ -25,12 +25,10 @@ export class DetailsComponent implements OnInit {
 
         this.podcastsApiService.getById(this.id)
             .pipe(
-                tap((r) => console.log(r)),
                 map((r) => {
                     [this.podcast] = [r.items[0]];
                 }),
-                tap((r) => console.log(r, this.podcast)),
-            )
+                )
             .subscribe();
     }
 }

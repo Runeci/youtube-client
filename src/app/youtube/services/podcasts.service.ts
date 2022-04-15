@@ -31,7 +31,7 @@ export class PodcastsService {
             queries = this.defaultParams;
         }
         const options = this.setParams(queries);
-        return this.http.get<PodcastPage>(`${this.baseUrl}/search`, { params: options });
+        return this.http.get<PodcastPage>('search', { params: options });
     }
 
     public getById(id: PodcastItem['id']): Observable<PodcastPage> {
@@ -40,7 +40,7 @@ export class PodcastsService {
             id,
             type: 'video',
         });
-        return this.http.get<PodcastPage>(`${ this.baseUrl }/videos`, { params: options });
+        return this.http.get<PodcastPage>('videos', { params: options });
     }
 
     private setParams(params: SearchParams): HttpParams {
