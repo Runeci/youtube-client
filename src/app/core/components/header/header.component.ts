@@ -1,12 +1,15 @@
 import {
-    Component,
+    AfterContentInit,
+    AfterViewInit,
+    Component, ElementRef,
     EventEmitter,
     OnInit,
-    Output,
+    Output, ViewChild,
 } from '@angular/core';
-import { filter, map } from 'rxjs';
+import { BehaviorSubject, filter, map, tap } from 'rxjs';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service';
+import { PodcastsService } from '../../../youtube/services/podcasts.service';
 
 @Component({
     selector: 'app-header',
@@ -16,13 +19,17 @@ import { AuthService } from '../../../auth/services/auth.service';
 export class HeaderComponent implements OnInit {
     @Output() public searchClicked: EventEmitter<void> = new EventEmitter();
 
-    public filterBarIsShown = false;
+    @ViewChild('searchBox') searchBox: ElementRef;
 
-    public searchValue: string;
+    public filterBarIsShown = false;
 
     public podcastIsShown = false;
 
     public showFiltersButton: boolean = false;
+
+    public searchQuery: string | '';
+
+    public isLoggedIn: boolean;
 
     constructor(
         private router: Router,
@@ -32,6 +39,11 @@ export class HeaderComponent implements OnInit {
     }
 
     public ngOnInit() {
+        this.authService.isLoggedIn.subscribe(
+            () => {
+                this.isLoggedIn = this.authService.isLoggedIn.value;
+            },
+        );
         this.router.events
             .pipe(
                 // @ts-ignore
@@ -46,6 +58,11 @@ export class HeaderComponent implements OnInit {
                     this.filterBarIsShown = false;
                 }
             });
+
+        this.activatedRoute.queryParams
+            .subscribe((params) => {
+                this.searchQuery = params['q'];
+            });
     }
 
     public onLogOut(): void {
@@ -53,9 +70,11 @@ export class HeaderComponent implements OnInit {
     }
 
     public onSearch(value: string): void {
-        this.searchClicked.emit();
-
-        this.searchValue = value;
+        this.router.navigate([], {
+            relativeTo: this.activatedRoute!,
+            queryParams: { q: value },
+            queryParamsHandling: 'merge',
+        });
         this.podcastIsShown = true;
     }
 

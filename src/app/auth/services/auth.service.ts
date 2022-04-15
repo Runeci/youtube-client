@@ -1,38 +1,39 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
+    public isLoggedIn: BehaviorSubject<boolean>;
+
     constructor(private router: Router) {
+        this.isLoggedIn = new BehaviorSubject<boolean>(!!localStorage.getItem('token'));
     }
 
-    public logIn(token: string): void {
-        localStorage.setItem('token', this.generateFakeToken(token));
-        this.router.navigate(['']);
+    public logIn(): void {
+        localStorage.setItem('token', this.generateFakeToken());
+        this.isLoggedIn.next(true);
     }
 
     public logOut(): void {
         localStorage.removeItem('token');
+        this.isLoggedIn.next(false);
         this.router.navigate(['/login']);
     }
 
-    public get isLoggedIn(): boolean {
-        return !!localStorage.getItem('token');
-    }
-
-    private generateFakeToken(id: string): string {
+    private generateFakeToken(): string {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         const tokenLength = 7;
         const charactersLength = characters.length;
 
-        let result = ' ';
+        let result = '';
 
         for (let i = 0; i < tokenLength; i += 1) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
-        result += id;
+
         return result;
     }
 }

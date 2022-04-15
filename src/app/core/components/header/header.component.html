@@ -4,11 +4,15 @@
         <div class="header-main">
             <div class="search">
                 <mat-form-field class="search-input" appearance="fill">
-                    <input matInput [(ngModel)]="searchValue" type="text" placeholder="Search">
+                    <input
+                        #searchBox
+                        (input)="onSearch(searchBox.value)"
+                        matInput
+                        type="text"
+                        placeholder="Search"
+                        [(ngModel)]="searchQuery"
+                    >
                 </mat-form-field>
-                <div class="search-btn">
-                    <button mat-raised-button color="accent" (click)="onSearch(searchValue)">Search</button>
-                </div>
             </div>
 
             <div class="auth-button-container" *ngIf="showFiltersButton">
@@ -21,12 +25,8 @@
                 </button>
             </div>
         </div>
-        <div class="auth-button-container">
-            <button routerLink="/login" mat-button class="auth-btn">
-                <mat-icon>account_circle</mat-icon>
-            </button>
-        </div>
-        <button mat-button (click)="onLogOut()">LogOut</button>
+        <button *ngIf="isLoggedIn" mat-button (click)="onLogOut()">LogOut</button>
+        <button routerLink="/login" *ngIf="!isLoggedIn" mat-button>LogIn</button>
     </mat-toolbar-row>
     <mat-toolbar-row class="header-second-row" *ngIf="filterBarIsShown">
         <app-filter></app-filter>
