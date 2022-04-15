@@ -3,9 +3,9 @@ import {
     HttpRequest,
     HttpHandler,
     HttpEvent,
-    HttpInterceptor, HttpParams,
+    HttpInterceptor, HttpParams, HttpResponse, HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -18,22 +18,22 @@ export class AuthInterceptor implements HttpInterceptor {
             params: (request.params ? request.params
                 : new HttpParams()).append('key', `${token}`),
         });
-        return next.handle(modifiedReq);
-        //     .pipe(
-        //     tap(
-        //         (event) => {
-        //             if (event instanceof HttpResponse) {
-        //                 console.log('Server successful response');
-        //             }
-        //         },
-        //         (err) => {
-        //             if (err instanceof HttpErrorResponse) {
-        //                 if (err.status === 401) {
-        //                     console.log('Unauthorized');
-        //                 }
-        //             }
-        //         },
-        //     ),
-        // );
+        return next.handle(modifiedReq)
+            .pipe(
+            tap(
+                (event) => {
+                    if (event instanceof HttpResponse) {
+                        console.log('Server successful response');
+                    }
+                },
+                (err) => {
+                    if (err instanceof HttpErrorResponse) {
+                        if (err.status === 401) {
+                            console.log('Unauthorized');
+                        }
+                    }
+                },
+            ),
+        );
     }
 }

@@ -15,8 +15,6 @@ export interface SearchParams {
     providedIn: 'root',
 })
 export class PodcastsService {
-    private baseUrl = 'https://www.googleapis.com/youtube/v3';
-
     private defaultParams: SearchParams = { type: 'video', part: 'snippet', maxResults: '15' };
 
     constructor(private http: HttpClient) {
@@ -24,12 +22,15 @@ export class PodcastsService {
 
     public getPodcasts(params?: SearchParams): Observable<PodcastPage> {
         let queries;
+
         if (params) {
             queries = { ...this.defaultParams, ...params };
         } else {
             queries = this.defaultParams;
         }
+
         const options = this.setParams(queries);
+
         return this.http.get<PodcastPage>('search', { params: options });
     }
 

@@ -10,8 +10,6 @@ export class FilterPipe implements PipeTransform {
         if (!searchValue) {
             return arr;
         }
-        return arr.filter((item) => item.snippet.title.toLowerCase().includes(searchValue)
-                || item.snippet.channelTitle.toLowerCase().includes(searchValue)
-                || item.snippet.tags.includes(searchValue));
+        return arr.filter((item) => item.snippet.tags.includes(searchValue));
     }
 }
