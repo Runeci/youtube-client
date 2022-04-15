@@ -1,8 +1,7 @@
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PodcastItem, PodcastPage } from '../models/podcast-item.typing';
-import { podcasts } from '../../core/mocks/response';
 
 export interface SearchParams {
     type?: string,

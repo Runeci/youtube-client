@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { catchError, debounce, debounceTime, filter, map, Observable, of, Subject, switchMap, tap } from 'rxjs';
+import {
+ catchError, debounceTime, filter, map, Observable, of, switchMap,
+} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PodcastItem } from '../../models/podcast-item.typing';
 import { PodcastsService, SearchParams } from '../../services/podcasts.service';
-import { SortDirection, SortEvent } from '../../../shared/filter/filter.component';
+// import { SortDirection, SortEvent } from '../../../shared/filter/filter.component';
 
 @Component({
     selector: 'app-main-page',

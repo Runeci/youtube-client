@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { map, tap } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PodcastId, PodcastItem } from '../../models/podcast-item.typing';
 import { PodcastsService } from '../../services/podcasts.service';

@@ -1,15 +1,14 @@
 import {
-    AfterContentInit,
-    AfterViewInit,
     Component, ElementRef,
     EventEmitter,
     OnInit,
     Output, ViewChild,
 } from '@angular/core';
-import { BehaviorSubject, filter, map, tap } from 'rxjs';
+import {
+  filter, map,
+} from 'rxjs';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service';
-import { PodcastsService } from '../../../youtube/services/podcasts.service';
 
 @Component({
     selector: 'app-header',
