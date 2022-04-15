@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { map, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { PodcastItem } from '../../models/podcast-item.typing';
+import { PodcastId, PodcastItem } from '../../models/podcast-item.typing';
 import { PodcastsService } from '../../services/podcasts.service';
 
 @Component({
@@ -9,20 +10,27 @@ import { PodcastsService } from '../../services/podcasts.service';
     styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
-    public id: string;
+    public id: PodcastId;
 
     public podcast: PodcastItem;
 
     constructor(
         private route: ActivatedRoute,
         private podcastsApiService: PodcastsService,
-    ) {}
+    ) {
+    }
 
     public ngOnInit() {
         this.id = this.route.snapshot.params['id'];
+
         this.podcastsApiService.getById(this.id)
-            .subscribe((podcast) => {
-                this.podcast = podcast;
-            });
+            .pipe(
+                tap((r) => console.log(r)),
+                map((r) => {
+                    [this.podcast] = [r.items[0]];
+                }),
+                tap((r) => console.log(r, this.podcast)),
+            )
+            .subscribe();
     }
 }

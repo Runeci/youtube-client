@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { catchError, debounce, debounceTime, filter, map, Observable, of, Subject, switchMap, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PodcastItem } from '../../models/podcast-item.typing';
-import { podcasts } from '../../../core/mocks/response';
+import { PodcastsService, SearchParams } from '../../services/podcasts.service';
 import { SortDirection, SortEvent } from '../../../shared/filter/filter.component';
-import { PodcastsService } from '../../services/podcasts.service';
 
 @Component({
     selector: 'app-main-page',
@@ -13,55 +13,74 @@ import { PodcastsService } from '../../services/podcasts.service';
 export class MainPageComponent implements OnInit {
     public isLoaded: boolean;
 
-    public podcastsArr: PodcastItem[];
+    public podcastsArr$: Observable<PodcastItem[]>;
 
-    public search: string = '';
+    private isFirstLoad = true;
 
     constructor(private podcastsService: PodcastsService, private activatedRoute: ActivatedRoute) {
     }
 
     public ngOnInit() {
-        this.getPodcasts();
+        this.podcastsArr$ = this.activatedRoute.queryParams
+            .pipe(
+                filter((params) => {
+                    if (params['q'] && this.isFirstLoad) {
+                        this.isFirstLoad = !this.isFirstLoad;
+                        return true;
+                    }
+                    if (params['q']) {
+                        return params['q']?.length > 3;
+                    }
+                    return true;
+                }),
+                debounceTime(300),
+                switchMap((params) => this.getPodcasts(params)),
+            );
 
-        this.activatedRoute.queryParams
-            .pipe()
-            .subscribe((params) => {
-                if (params['sort']) {
-                    const [field, direction] = params['sort'].split(',');
-                    this.onSort({ field, direction });
-                }
-
-                if (params['search'] !== undefined) {
-                    this.search = params['search'];
-                }
-            });
+        // this.podcastsArr$ = this.getPodcasts();
+        //     .subscribe((params) => {
+        //         if (params['sort']) {
+        //             // const [field, direction] = params['sort'].split(',');
+        //             // this.onSort({ field, direction });
+        //         }
+        //
+        //         if (params['search'] !== undefined) {
+        //             this.search = params['search'];
+        //         }
+        //     });
     }
 
-    private getPodcasts() {
-        this.podcastsService.getPodcasts().subscribe((p) => {
-            this.podcastsArr = p;
-        });
+    private getPodcasts(params?: SearchParams): Observable<PodcastItem[]> {
+        return this.podcastsService.getPodcasts(params).pipe(
+            catchError(() => of({ items: [] })),
+            map((r) => r.items || []),
+        );
     }
 
-    public onSort(sortEvent: SortEvent): void {
-        if (sortEvent.direction === null) {
-            this.podcastsArr = podcasts.items;
-        }
-
-        this.podcastsArr.sort((a, b) => {
-            if (sortEvent.field === 'date') {
-                const prevVal = +new Date(a.snippet.publishedAt);
-                const nextVal = +new Date(b.snippet.publishedAt);
-                return sortEvent.direction === SortDirection.Asc ? (nextVal - prevVal) : (prevVal - nextVal);
-            }
-
-            if (sortEvent.field === 'count') {
-                const prevVal = parseInt(a.statistics.viewCount, 10);
-                const nextVal = parseInt(b.statistics.viewCount, 10);
-                return sortEvent.direction === SortDirection.Asc ? (nextVal - prevVal) : (prevVal - nextVal);
-            }
-
-            return 0;
-        });
-    }
+    // public onSort(sortEvent: SortEvent): void {
+    //     if (sortEvent.direction === null) {
+    //         this.podcastsArr$ = this.getPodcasts();
+    //     }
+    //     console.log('onsort');
+    //     this.podcastsArr$.pipe(
+    //         map((r) => {
+    //             r.sort((a, b) => {
+    //                 if (sortEvent.field === 'date') {
+    //                     const prevVal = +new Date(a.snippet.publishedAt);
+    //                     const nextVal = +new Date(b.snippet.publishedAt);
+    //                     return sortEvent.direction === SortDirection.Asc ? (nextVal - prevVal) : (prevVal - nextVal);
+    //                 }
+    //
+    //                 if (sortEvent.field === 'count') {
+    //                     // const prevVal = parseInt(a.statistics.viewCount, 10);
+    //                     // const nextVal = parseInt(b.statistics.viewCount, 10);
+    //                     // return sortEvent.direction === SortDirection.Asc ? (nextVal - prevVal) : (prevVal - nextVal);
+    //                 }
+    //
+    //                 return 0;
+    //             });
+    //             return r;
+    //         }),
+    //     ).subscribe();
+    // }
 }

@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { PageNotFoundComponent } from './youtube/pages/page-not-found/page-not-found.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 
 @NgModule({
     declarations: [
@@ -21,8 +23,11 @@ import { PageNotFoundComponent } from './youtube/pages/page-not-found/page-not-f
         AppRoutingModule,
         CoreModule,
         MatIconModule,
+        HttpClientModule,
     ],
-    providers: [],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {

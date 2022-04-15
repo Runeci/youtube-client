@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="podcast">
     <img
         mat-card-image
         [src]="podcast.snippet.thumbnails.high.url"
@@ -16,22 +16,22 @@
             </mat-card-content>
         </div>
         <div class="card-actions">
-            <div class="views card-content-item">
-                <mat-icon>visibility</mat-icon>
-                <span>{{ podcast.statistics.viewCount }}</span>
-            </div>
-            <div class="likes card-content-item">
-                <mat-icon>favorite</mat-icon>
-                <span>{{ podcast.statistics.favoriteCount }}</span>
-            </div>
-            <div class="dislikes card-content-item">
-                <mat-icon>thumb_down</mat-icon>
-                <span>{{ podcast.statistics.dislikeCount }}</span>
-            </div>
-            <div class="comments card-content-item">
-                <mat-icon>question_answer</mat-icon>
-                <span> {{ podcast.statistics.commentCount }}</span>
-            </div>
+<!--            <div class="views card-content-item">-->
+<!--                <mat-icon>visibility</mat-icon>-->
+<!--                <span>{{ podcast.statistics.viewCount }}</span>-->
+<!--            </div>-->
+<!--            <div class="likes card-content-item">-->
+<!--                <mat-icon>favorite</mat-icon>-->
+<!--                <span>{{ podcast.statistics.favoriteCount }}</span>-->
+<!--            </div>-->
+<!--            <div class="dislikes card-content-item">-->
+<!--                <mat-icon>thumb_down</mat-icon>-->
+<!--                <span>{{ podcast.statistics.dislikeCount }}</span>-->
+<!--            </div>-->
+<!--            <div class="comments card-content-item">-->
+<!--                <mat-icon>question_answer</mat-icon>-->
+<!--                <span> {{ podcast.statistics.commentCount }}</span>-->
+<!--            </div>-->
         </div>
 <!--        <mat-card-footer>-->
 <!--            <mat-progress-bar></mat-progress-bar>-->

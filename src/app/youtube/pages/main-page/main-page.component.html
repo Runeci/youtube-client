@@ -1,5 +1,6 @@
 <div class="podcast-page">
   <app-podcast-list
-    [podcasts]="podcastsArr | filter:search">
+      *ngIf="podcastsArr$ | async as podcastArr"
+    [podcasts]="podcastArr">
   </app-podcast-list>
 </div>

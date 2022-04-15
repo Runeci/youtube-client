@@ -6,7 +6,7 @@ import { AuthGuard } from './auth/guards/auth.guard';
 const routes: Routes = [
     {
         path: '',
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         loadChildren: () => import('./youtube/youtube.module')
             .then((m) => m.YoutubeModule),
     },
@@ -15,7 +15,7 @@ const routes: Routes = [
         loadChildren: () => import('./auth/auth.module')
             .then((m) => m.AuthModule),
     },
-    { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
+    // { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 ];
 
 @NgModule({
