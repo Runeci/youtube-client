@@ -25,4 +25,8 @@ export class AdminPageComponent implements OnInit {
             date: [''],
         });
     }
+
+    public onSubmit() {
+        this.form.markAllAsTouched();
+    }
 }

@@ -1,5 +1,5 @@
 <mat-card>
-    <form class="form" [formGroup]="form">
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
         <mat-card-title>Create a new card</mat-card-title>
         <mat-card-content>
             <div>
@@ -17,8 +17,8 @@
                         <mat-error *ngIf="form.controls['title'].touched && form.get('title')?.hasError('minlength')">
                             The title is too short
                         </mat-error>
-                        <mat-error *ngIf="form.get('title')?.touched && !form.get('title')?.dirty">Please enter a
-                            title
+                        <mat-error *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
+                            Please enter a title
                         </mat-error>
                     </mat-form-field>
                 </p>
@@ -43,8 +43,15 @@
                             matInput
                             placeholder="img">
                     </mat-form-field>
-                    <mat-error *ngIf="form.get('img')?.touched && !form.get('img')?.dirty">The image link is invalid
+                    <mat-error
+                        *ngIf="form.get('img')?.invalid && form.get('img')?.touched">
+                        Please enter a link to the image
                     </mat-error>
+                    <mat-error
+                        *ngIf="form.get('linkVideo')?.hasError('pattern')">
+                        The video link is invalid
+                    </mat-error>
+
                 </p>
                 <p>
                     <mat-form-field>
@@ -54,9 +61,10 @@
                             matInput
                             placeholder="video link">
                     </mat-form-field>
-                    <mat-error *ngIf="form.get('linkVideo')?.touched && !form.get('linkVideo')?.dirty">The video link is
-                        invalid
+                    <mat-error *ngIf="form.get('linkVideo')?.touched && form.get('img')?.invalid">
+                        Please enter a link to the video
                     </mat-error>
+                    <mat-error *ngIf="form.get('linkVideo')?.hasError('pattern')">The video link is invalid</mat-error>
                 </p>
                 <p>
                     <mat-form-field>
@@ -72,8 +80,8 @@
                         <mat-datepicker #date [disabled]="false"></mat-datepicker>
                     </mat-form-field>
 
-                    <mat-error *ngIf="form.get('date')?.touched && !form.get('date')?.dirty">Please enter a creation
-                        date
+                    <mat-error *ngIf="form.get('date')?.touched && form.get('date')?.invalid">
+                        Please enter a creation date
                     </mat-error>
 
                 </p>
@@ -81,6 +89,7 @@
                     <button
                         type="submit"
                         mat-button
+                        [disabled]="form.invalid"
                     >Create
                     </button>
                 </div>
