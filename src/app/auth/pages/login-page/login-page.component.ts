@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
-    passwordStrengthValidator,
+    PasswordStrengthValidator,
 } from '../../../shared/helpers/validators/password.validator';
 
 @Component({
@@ -26,8 +26,7 @@ export class LoginPageComponent implements OnInit {
         this.loginForm = new FormGroup(
             {
                 email: new FormControl('', [Validators.required, Validators.email]),
-                // @ts-ignore
-                password: new FormControl('', Validators.required, passwordStrengthValidator),
+                password: new FormControl('', [Validators.required, PasswordStrengthValidator]),
             },
         );
     }
@@ -35,7 +34,6 @@ export class LoginPageComponent implements OnInit {
     public onSubmit(): void {
         this.authService.logIn();
         this.router.navigate(['']);
-        console.log(this.loginForm);
     }
 
     get f() {

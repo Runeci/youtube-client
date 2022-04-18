@@ -25,7 +25,8 @@
                 </button>
             </div>
         </div>
-        <button *ngIf="isLoggedIn" mat-button (click)="onLogOut()">LogOut</button>
+        <button routerLink="/admin" *ngIf="isLoggedIn" mat-button>Admin page</button>
+        <button *ngIf="isLoggedIn" (click)="onLogOut()" mat-button >LogOut</button>
         <button routerLink="/login" *ngIf="!isLoggedIn" mat-button>LogIn</button>
     </mat-toolbar-row>
     <mat-toolbar-row class="header-second-row" *ngIf="filterBarIsShown">

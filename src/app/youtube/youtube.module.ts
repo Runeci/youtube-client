@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -13,6 +13,9 @@ import { PodcastItemComponent } from './pages/main-page/podcast-list/podcast-ite
 import { FilterPipe } from './pipes/filter-pipe/filter.pipe';
 import { YoutubeRoutingModule } from './youtube-routing.module';
 import { DetailsComponent } from './pages/details/details.component';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
     declarations: [
@@ -21,6 +24,7 @@ import { DetailsComponent } from './pages/details/details.component';
         PodcastItemComponent,
         FilterPipe,
         DetailsComponent,
+        AdminPageComponent,
     ],
     imports: [
         CommonModule,
@@ -32,6 +36,9 @@ import { DetailsComponent } from './pages/details/details.component';
         MatInputModule,
         FormsModule,
         YoutubeRoutingModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
     ],
     exports: [
         MainPageComponent,

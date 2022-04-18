@@ -16,7 +16,7 @@
                             The login email is invalid
                         </mat-error>
                         <mat-error
-                            *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+                            *ngIf="loginForm.get('email')?.touched && !loginForm.get('email')?.dirty">
                             Please enter a login email
                         </mat-error>
                     </mat-form-field>
@@ -29,10 +29,12 @@
                             matInput
                             placeholder="Password">
                         <mat-error
-                            *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                            *ngIf="loginForm.get('password')?.invalid && !loginForm.get('password')?.dirty"
                         >Please enter a password
                         </mat-error>
-                        <mat-error></mat-error>
+                        <mat-error *ngIf="loginForm.get('password')?.hasError('passwordStrength')">
+                            {{loginForm.get('password')?.errors?.['passwordStrength']}}
+                        </mat-error>
                     </mat-form-field>
                 </p>
                 <div class="button">

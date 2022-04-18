@@ -1,0 +1,91 @@
+<mat-card>
+    <form class="form" [formGroup]="form">
+        <mat-card-title>Create a new card</mat-card-title>
+        <mat-card-content>
+            <div>
+                <p>
+                    <mat-form-field>
+                        <input
+                            formControlName="title"
+                            type="ytext"
+                            matInput
+                            placeholder="Title"
+                        >
+                        <mat-error *ngIf="form.controls['title'].touched && form.get('title')?.hasError('maxlength')">
+                            The title is too long
+                        </mat-error>
+                        <mat-error *ngIf="form.controls['title'].touched && form.get('title')?.hasError('minlength')">
+                            The title is too short
+                        </mat-error>
+                        <mat-error *ngIf="form.get('title')?.touched && !form.get('title')?.dirty">Please enter a
+                            title
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input
+                            formControlName="description"
+                            type="text"
+                            matInput
+                            placeholder="Description">
+                    </mat-form-field>
+                    <mat-error
+                        *ngIf="form.controls['description'].touched && form.get('description')?.hasError('maxlength')">
+                        The description is too long
+                    </mat-error>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input
+                            formControlName="img"
+                            type="url"
+                            matInput
+                            placeholder="img">
+                    </mat-form-field>
+                    <mat-error *ngIf="form.get('img')?.touched && !form.get('img')?.dirty">The image link is invalid
+                    </mat-error>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input
+                            formControlName="linkVideo"
+                            type="url"
+                            matInput
+                            placeholder="video link">
+                    </mat-form-field>
+                    <mat-error *ngIf="form.get('linkVideo')?.touched && !form.get('linkVideo')?.dirty">The video link is
+                        invalid
+                    </mat-error>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input
+                            [matDatepicker]="date"
+                            formControlName="date"
+                            matInput
+                            placeholder="creation date"
+                            (click)="date.open()"
+                            [min]="minDate"
+                        >
+                        <mat-datepicker-toggle matPrefix [for]="date" [disabled]="false"></mat-datepicker-toggle>
+                        <mat-datepicker #date [disabled]="false"></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-error *ngIf="form.get('date')?.touched && !form.get('date')?.dirty">Please enter a creation
+                        date
+                    </mat-error>
+
+                </p>
+                <div class="button">
+                    <button
+                        type="submit"
+                        mat-button
+                    >Create
+                    </button>
+                </div>
+            </div>
+        </mat-card-content>
+    </form>
+</mat-card>
+
