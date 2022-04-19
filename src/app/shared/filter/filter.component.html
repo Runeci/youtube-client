@@ -1,0 +1,21 @@
+<div class="filters">
+  <span>Sorting by:</span>
+  <div class="date-filter filter" (click)="sortChanges(sortFields.Date)">
+    <span>Date</span>
+    <div [ngSwitch]="sortSettings.direction" *ngIf="sortSettings.field === sortFields.Date">
+      <mat-icon *ngSwitchCase="sortDirections.Asc">arrow_upward</mat-icon>
+      <mat-icon *ngSwitchCase="sortDirections.Desc">arrow_downward</mat-icon>
+    </div>
+
+  </div>
+  <div class="views-filter filter" (click)="sortChanges(sortFields.Count)">
+    <span>View</span>
+    <div [ngSwitch]="sortSettings.direction" *ngIf="sortSettings.field === sortFields.Count">
+      <mat-icon *ngSwitchCase="sortDirections.Asc">arrow_upward</mat-icon>
+      <mat-icon *ngSwitchCase="sortDirections.Desc">arrow_downward</mat-icon>
+    </div>
+
+  </div>
+  <input type="text" [(ngModel)]="searchVal" (ngModelChange)="filterSearchInput.emit(searchVal)">
+</div>
+

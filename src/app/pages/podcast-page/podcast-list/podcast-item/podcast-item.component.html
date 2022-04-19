@@ -1,0 +1,41 @@
+<div class="podcast-item">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Podcast {{ podcastItem.snippet.title }}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image
+         [src]="podcastItem.snippet.thumbnails.medium.url"
+         [alt]="podcastItem.snippet.title">
+    <mat-card-content></mat-card-content>
+    <mat-card-content>
+      <div class="views card-content-item">
+        <mat-icon>visibility</mat-icon>
+        <span>{{ podcastItem.statistics.viewCount }}</span>
+      </div>
+      <div class="likes card-content-item">
+        <mat-icon>favorite</mat-icon>
+        <span>{{ podcastItem.statistics.favoriteCount }}</span>
+      </div>
+      <div class="dislikes card-content-item">
+        <mat-icon>thumb_down</mat-icon>
+        <span>{{ podcastItem.statistics.dislikeCount }}</span>
+      </div>
+      <div class="comments card-content-item">
+        <mat-icon>question_answer</mat-icon>
+        <span> {{ podcastItem.statistics.commentCount }}</span>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">MORE</button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <mat-progress-bar
+        [ngClass]="changeBottomBorderColor(podcastItem.snippet.publishedAt)"
+      ></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</div>
+
+
+
+

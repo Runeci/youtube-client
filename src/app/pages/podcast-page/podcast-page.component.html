@@ -1,0 +1,12 @@
+<div class="podcast-page">
+  <app-header
+    (searchClicked)="initListLoad()"
+    (sort)="onSort($event)"
+    (search)="onSearch($event)"
+  >
+  </app-header>
+  <app-podcast-list
+    *ngIf="isLoaded"
+    [podcasts]="podcastsArr | filter:search"
+  ></app-podcast-list>
+</div>
