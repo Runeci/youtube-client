@@ -70,16 +70,20 @@ export class MainPageComponent implements OnInit {
 
         if (params['sort']) {
             const [field, direction] = params['sort'].split(',');
-            this.onSort({ field, direction });
+            this.onSort({ field, direction }, this.filteredPodcasts);
+        }
+
+        if (params['search'] !== undefined) {
+            this.search = params['search'];
         }
     }
 
-    public onSort(sortEvent: SortEvent): void {
+    public onSort(sortEvent: SortEvent, arr: PodcastItem[]): void {
         if (sortEvent.direction === null) {
             return;
         }
 
-        this.filteredPodcasts.sort((a, b) => {
+        arr.sort((a, b) => {
             if (sortEvent.field === 'date') {
                 const prevVal = +new Date(a.snippet.publishedAt);
                 const nextVal = +new Date(b.snippet.publishedAt);
@@ -102,3 +106,5 @@ export class MainPageComponent implements OnInit {
         );
     }
 }
+
+

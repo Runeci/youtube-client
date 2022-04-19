@@ -6,10 +6,13 @@ import { PodcastItem } from '../../models/podcast-item.typing';
 })
 export class FilterPipe implements PipeTransform {
     transform(arr: PodcastItem[], searchVal: string): PodcastItem[] {
-        const searchValue = searchVal.toLowerCase().trim();
-        if (!searchValue) {
+        if (typeof arr === 'undefined') {
+            return [] as PodcastItem[];
+        }
+        if (!searchVal) {
             return arr;
         }
-        return arr.filter((item) => item.snippet.tags.includes(searchValue));
+        const searchValue = searchVal.toLowerCase().trim();
+        return arr.filter((item) => item.snippet.title.toLowerCase().trim().includes(searchValue));
     }
 }
