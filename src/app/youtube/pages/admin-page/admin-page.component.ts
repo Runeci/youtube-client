@@ -11,7 +11,7 @@ export class AdminPageComponent implements OnInit {
 
     public minDate: Date = new Date();
 
-    private urlRegex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+    private urlRegex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/;
 
     constructor(private fb: FormBuilder) {
     }

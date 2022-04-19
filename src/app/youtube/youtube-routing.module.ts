@@ -15,7 +15,7 @@ const routes: Routes = [
         },
     },
     { path: 'details/:id', component: DetailsComponent },
-    {path: 'admin', component: AdminPageComponent},
+    { path: 'admin', component: AdminPageComponent },
 ];
 
 @NgModule({

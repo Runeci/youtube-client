@@ -25,13 +25,12 @@ export function PasswordStrengthValidator(control: AbstractControl): ValidationE
     if (!specialCharacters.test(value)) {
         errorMessage += '- inclusion of at least one special character, e.g., ! @ # ? ] \n';
     }
-    console.log(!specialCharacters.test(value), 'l', !lowerCaseCharacters.test(value), 'u', !upperCaseCharacters.test(value), 'n', !numberCharacters.test(value), value.length < 8);
     return value.length < 8
     || !lowerCaseCharacters.test(value)
     || !upperCaseCharacters.test(value)
     || !numberCharacters.test(value)
     || !specialCharacters.test(value)
         ? {
-            passwordStrength: `${ errorMessage }`,
+            passwordStrength: `${errorMessage}`,
         } : null;
 }
