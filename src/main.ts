@@ -9,4 +9,7 @@ if (environment.production) {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+  .catch((err) => {
+    /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+    console.error(err);
+  });

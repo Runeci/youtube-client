@@ -1,0 +1,6 @@
+<div class="podcast-page">
+    <app-podcast-list
+        *ngIf="podcastArr"
+        [podcasts]="filteredPodcasts | filter:search">
+    </app-podcast-list>
+</div>

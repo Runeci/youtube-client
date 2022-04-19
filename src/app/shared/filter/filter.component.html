@@ -1,0 +1,14 @@
+<div class="filters">
+  <span>Sorting by:</span>
+    <ng-container *ngFor="let sortField of sortFields">
+        <div class="date-filter filter" (click)="sortChanges(sortField)">
+            <span>{{ sortField | titlecase }}</span>
+            <div [ngSwitch]="sortSettings.direction" *ngIf="sortSettings.field === sortField">
+                <mat-icon *ngSwitchCase="sortDirections.Asc">arrow_upward</mat-icon>
+                <mat-icon *ngSwitchCase="sortDirections.Desc">arrow_downward</mat-icon>
+            </div>
+        </div>
+    </ng-container>
+  <input type="text" [(ngModel)]="searchVal" (ngModelChange)="onSearch()">
+</div>
+
