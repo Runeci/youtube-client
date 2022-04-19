@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AppComponent } from './app.component';
+
 import { AuthComponent } from './pages/auth/auth.component';
 import { PodcastPageComponent } from './pages/podcast-page/podcast-page.component';
 import { PodcastListComponent } from './pages/podcast-page/podcast-list/podcast-list.component';
@@ -18,6 +19,9 @@ import { FilterComponent } from './shared/filter/filter.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FilterPipe } from './pages/podcast-page/filter-pipe/filter.pipe';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
