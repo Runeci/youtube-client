@@ -23,12 +23,14 @@ export class AuthInterceptor implements HttpInterceptor {
             tap(
                 (event) => {
                     if (event instanceof HttpResponse) {
+                        // eslint-disable-next-line no-console
                         console.log('Server successful response');
                     }
                 },
                 (err) => {
                     if (err instanceof HttpErrorResponse) {
                         if (err.status === 401) {
+                            // eslint-disable-next-line no-console
                             console.log('Unauthorized');
                         }
                     }
