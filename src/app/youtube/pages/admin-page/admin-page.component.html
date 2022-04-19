@@ -11,13 +11,16 @@
                             matInput
                             placeholder="Title"
                         >
-                        <mat-error *ngIf="form.controls['title'].touched && form.get('title')?.hasError('maxlength')">
+                        <mat-error
+                            *ngIf="form.controls['title'].touched && form.get('title')?.hasError('maxlength')">
                             The title is too long
                         </mat-error>
-                        <mat-error *ngIf="form.controls['title'].touched && form.get('title')?.hasError('minlength')">
+                        <mat-error
+                            *ngIf="form.controls['title'].touched && form.get('title')?.hasError('minlength')">
                             The title is too short
                         </mat-error>
-                        <mat-error *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
+                        <mat-error
+                            *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
                             Please enter a title
                         </mat-error>
                     </mat-form-field>
@@ -44,11 +47,11 @@
                             placeholder="img">
                     </mat-form-field>
                     <mat-error
-                        *ngIf="form.get('img')?.invalid && form.get('img')?.touched">
+                        *ngIf="form.get('img')?.invalid && form.get('img')?.touched && !form.get('img')?.dirty">
                         Please enter a link to the image
                     </mat-error>
                     <mat-error
-                        *ngIf="form.get('linkVideo')?.hasError('pattern')">
+                        *ngIf="form.get('img')?.hasError('pattern')">
                         The video link is invalid
                     </mat-error>
 
@@ -61,10 +64,16 @@
                             matInput
                             placeholder="video link">
                     </mat-form-field>
-                    <mat-error *ngIf="form.get('linkVideo')?.touched && form.get('img')?.invalid">
+                    <mat-error
+                        *ngIf="form.get('linkVideo')?.touched
+                        && form.get('linkVideo')?.invalid
+                        && !form.get('linkVideo')?.dirty"
+                    >
                         Please enter a link to the video
                     </mat-error>
-                    <mat-error *ngIf="form.get('linkVideo')?.hasError('pattern')">The video link is invalid</mat-error>
+                    <mat-error
+                        *ngIf="form.get('linkVideo')?.hasError('pattern')">The video link is invalid
+                    </mat-error>
                 </p>
                 <p>
                     <mat-form-field>
