@@ -10,8 +10,8 @@ import { Observable, tap } from 'rxjs';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
     public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        // const token = 'AIzaSyAG9ee9rHfwYGaVyTNRCug18Igviz7NzyM';
-        const token = 'AIzaSyBuhrQSxesvy-yxDey_4W0YW2OW0Jn0ouA';
+        const token = 'AIzaSyAG9ee9rHfwYGaVyTNRCug18Igviz7NzyM';
+        // const token = 'AIzaSyBuhrQSxesvy-yxDey_4W0YW2OW0Jn0ouA';
         // const token = '';
         const modifiedReq = request.clone({
             url: `https://www.googleapis.com/youtube/v3/${request.url}`,

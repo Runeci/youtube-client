@@ -96,9 +96,9 @@
                 </p>
                 <div class="button">
                     <button
+                        [disabled] = form.invalid
                         type="submit"
                         mat-button
-                        [disabled]="form.invalid"
                     >Create
                     </button>
                 </div>
@@ -106,4 +106,8 @@
         </mat-card-content>
     </form>
 </mat-card>
+
+<div *ngFor="let card of cards$ | async">
+    <div class=""> {{card.date | date:"short"}}</div>
+</div>
 

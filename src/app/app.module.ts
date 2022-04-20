@@ -8,7 +8,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { PageNotFoundComponent } from './youtube/pages/page-not-found/page-not-found.component';
-import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './redux/reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
@@ -23,6 +27,10 @@ import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
         CoreModule,
         MatIconModule,
         HttpClientModule,
+        StoreModule.forRoot(reducers, {
+      metaReducers,
+    }),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
