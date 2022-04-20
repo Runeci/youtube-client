@@ -36,6 +36,18 @@ import { environment } from '../environments/environment';
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     ],
     bootstrap: [AppComponent],
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 
