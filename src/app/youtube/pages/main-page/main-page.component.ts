@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
-    catchError, debounceTime, distinctUntilChanged, filter, map, Observable, of, switchMap,
+    catchError, debounceTime, distinctUntilChanged, filter, map, Observable, of, switchMap, tap,
 } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PodcastItem } from '../../models/podcast-item.typing';
@@ -44,7 +44,7 @@ export class MainPageComponent implements OnInit {
                     return true;
                 }),
                 debounceTime(300),
-                switchMap((search) => this.getPodcasts(search)),
+                switchMap((search) => this.getPodcasts({ q: search })),
             );
 
         this.podcastsArr$
