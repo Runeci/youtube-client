@@ -72,8 +72,8 @@ export class HeaderComponent implements OnInit {
         this.router.navigate([], {
             relativeTo: this.activatedRoute!,
             queryParams: { q: value },
-            queryParamsHandling: 'merge',
         });
+
         this.podcastIsShown = true;
     }
 

@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PodcastItem } from '../../models/podcast-item.typing';
 import { PodcastsService, SearchParams } from '../../services/podcasts.service';
 import { SortDirection, SortEvent } from '../../../shared/filter/filter.component';
+import { Store } from '@ngrx/store';
+import { getPodcasts } from '../../../redux/actions/podcasts.action';
 
 @Component({
     selector: 'app-main-page',
@@ -15,8 +17,6 @@ import { SortDirection, SortEvent } from '../../../shared/filter/filter.componen
 export class MainPageComponent implements OnInit {
     public isLoaded: boolean;
 
-    public podcastsArr$: Observable<PodcastItem[]>;
-
     public podcastArr: PodcastItem[];
 
     public filteredPodcasts: PodcastItem[];
@@ -25,11 +25,15 @@ export class MainPageComponent implements OnInit {
 
     public search: string;
 
-    constructor(private podcastsService: PodcastsService, private activatedRoute: ActivatedRoute) {
+    constructor(
+        private store: Store,
+        private podcastsService: PodcastsService,
+        private activatedRoute: ActivatedRoute,
+    ) {
     }
 
     public ngOnInit() {
-        this.podcastsArr$ = this.activatedRoute.queryParams
+        this.activatedRoute.queryParams
             .pipe(
                 map((params) => params['q']),
                 distinctUntilChanged(),
@@ -45,11 +49,10 @@ export class MainPageComponent implements OnInit {
                 }),
                 debounceTime(300),
                 switchMap((search) => this.getPodcasts({ q: search })),
-            );
-
-        this.podcastsArr$
+            )
             .subscribe((podcasts) => {
                 this.podcastArr = podcasts;
+                this.store.dispatch(getPodcasts({ podcasts }));
                 this.filterPodcast();
             });
 
