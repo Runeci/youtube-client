@@ -1,0 +1,17 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{card.title | titlecase}}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <img mat-card-image src="{{card.img}}" alt="img">
+        <div>
+            <a href="{{card.linkVideo}}" target="_blank">{{card.linkVideo}}</a>
+        </div>
+        <div *ngIf="card.description">
+            <p class="description">Description:</p>
+            <p class="description-text">{{card.description}}</p>
+        </div>
+        <div style="font-weight: bold">{{card.date | date:"shortDate"}}</div>
+    </mat-card-content>
+</mat-card>

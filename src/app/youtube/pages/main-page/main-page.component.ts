@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import {
-    catchError, debounceTime, distinctUntilChanged, filter, map, Observable, of, switchMap, tap,
+    catchError, debounceTime, distinctUntilChanged, filter, map, Observable, of, switchMap,
 } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PodcastItem } from '../../models/podcast-item.typing';
 import { PodcastsService, SearchParams } from '../../services/podcasts.service';
 import { SortDirection, SortEvent } from '../../../shared/filter/filter.component';
-import { Store } from '@ngrx/store';
 import { getPodcasts } from '../../../redux/actions/podcasts.action';
 
 @Component({

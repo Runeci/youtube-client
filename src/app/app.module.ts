@@ -4,14 +4,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { PageNotFoundComponent } from './youtube/pages/page-not-found/page-not-found.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
-import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './redux/reducers';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -28,8 +28,8 @@ import { environment } from '../environments/environment';
         MatIconModule,
         HttpClientModule,
         StoreModule.forRoot(reducers, {
-      metaReducers,
-    }),
+            metaReducers,
+        }),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     ],
     providers: [

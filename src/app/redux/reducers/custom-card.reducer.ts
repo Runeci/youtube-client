@@ -6,5 +6,5 @@ export const initialState: CustomCard[] = [];
 
 export const customCardReducer = createReducer(
     initialState,
-    on(addCard, (state: CustomCard[], { card }) => [...state, card]),
+    on(addCard, (state: CustomCard[], { card }): CustomCard[] => [...state, card]),
 );

@@ -1,7 +1,7 @@
 export interface CustomCard {
     title: string,
-    videoLink: string,
+    linkVideo: string,
     description?: string,
-    imgLink: string,
+    img: string,
     date: Date,
 }

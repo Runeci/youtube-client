@@ -20,7 +20,7 @@
                             The title is too short
                         </mat-error>
                         <mat-error
-                            *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
+                            *ngIf="form.get('title')?.invalid && form.get('title')?.touched && !form.get('title')?.dirty">
                             Please enter a title
                         </mat-error>
                     </mat-form-field>
@@ -54,7 +54,6 @@
                         *ngIf="form.get('img')?.hasError('pattern')">
                         The video link is invalid
                     </mat-error>
-
                 </p>
                 <p>
                     <mat-form-field>
@@ -89,7 +88,7 @@
                         <mat-datepicker #date [disabled]="false"></mat-datepicker>
                     </mat-form-field>
 
-                    <mat-error *ngIf="form.get('date')?.touched && form.get('date')?.invalid">
+                    <mat-error *ngIf="form.get('date')?.touched && form.get('date')?.invalid && !form.get('date')?.dirty">
                         Please enter a creation date
                     </mat-error>
 
@@ -99,15 +98,14 @@
                         [disabled] = form.invalid
                         type="submit"
                         mat-button
-                    >Create
-                    </button>
+                    >Create</button>
                 </div>
             </div>
         </mat-card-content>
     </form>
 </mat-card>
 
-<div *ngFor="let card of cards$ | async">
-    <div class=""> {{card.date | date:"short"}}</div>
+<div class="cards">
+    <app-admin-card *ngFor="let card of cards$ | async" [card]="card"></app-admin-card>
 </div>
 

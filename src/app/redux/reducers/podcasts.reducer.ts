@@ -6,5 +6,5 @@ export const initialPodcastState: PodcastItem[] = [];
 
 export const podcastsReducer = createReducer(
     initialPodcastState,
-    on(getPodcasts, (state: PodcastItem[], { podcasts }) => podcasts),
+    on(getPodcasts, (state: PodcastItem[], { podcasts }): PodcastItem[] => podcasts),
 );

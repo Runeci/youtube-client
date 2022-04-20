@@ -19,6 +19,7 @@ import { PodcastItemComponent } from './pages/main-page/podcast-list/podcast-ite
 import { DetailsComponent } from './pages/details/details.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { FilterPipe } from './pipes/filter-pipe/filter.pipe';
+import { AdminCardComponent } from './pages/admin-page/admin-card/admin-card.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { FilterPipe } from './pipes/filter-pipe/filter.pipe';
         FilterPipe,
         DetailsComponent,
         AdminPageComponent,
+        AdminCardComponent,
     ],
     imports: [
         CommonModule,
