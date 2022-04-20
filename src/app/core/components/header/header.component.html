@@ -1,0 +1,38 @@
+<mat-toolbar class="header" color="primary">
+    <mat-toolbar-row class="header-first-row">
+        <span class="logo" routerLink="">My Youtube</span>
+        <div class="header-main">
+            <div class="search">
+                <mat-form-field class="search-input" appearance="fill">
+                    <input
+                        #searchBox
+                        (input)="onSearch(searchBox.value)"
+                        matInput
+                        type="text"
+                        placeholder="Search"
+                        [(ngModel)]="searchQuery"
+                    >
+                </mat-form-field>
+            </div>
+
+            <div class="auth-button-container" *ngIf="showFiltersButton">
+                <button mat-button>
+                    <mat-icon
+                        class="settings"
+                        aria-hidden="false"
+                        (click)="toggleFilters()">tune
+                    </mat-icon>
+                </button>
+            </div>
+        </div>
+        <button routerLink="/admin" *ngIf="isLoggedIn" mat-button>Admin page</button>
+        <button *ngIf="isLoggedIn" (click)="onLogOut()" mat-button >LogOut</button>
+        <button routerLink="/login" *ngIf="!isLoggedIn" mat-button>LogIn</button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="header-second-row" *ngIf="filterBarIsShown">
+        <app-filter></app-filter>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+

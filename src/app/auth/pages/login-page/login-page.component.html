@@ -1,0 +1,52 @@
+<mat-card>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-card-title>Login</mat-card-title>
+        <mat-card-content>
+            <div>
+                <p>
+                    <mat-form-field>
+                        <input
+                            formControlName="email"
+                            type="email"
+                            matInput
+                            placeholder="Email"
+                        >
+                        <mat-error
+                            *ngIf="loginForm.get('email')?.dirty && loginForm.get('email')?.invalid">
+                            The login email is invalid
+                        </mat-error>
+                        <mat-error
+                            *ngIf="loginForm.get('email')?.touched && !loginForm.get('email')?.dirty">
+                            Please enter a login email
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field>
+                        <input
+                            formControlName="password"
+                            type="password"
+                            matInput
+                            placeholder="Password">
+                        <mat-error
+                            *ngIf="loginForm.get('password')?.invalid && !loginForm.get('password')?.dirty"
+                        >Please enter a password
+                        </mat-error>
+                        <mat-error *ngIf="loginForm.get('password')?.hasError('passwordStrength')">
+                            {{loginForm.get('password')?.errors?.['passwordStrength']}}
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <div class="button">
+                    <button
+                        type="submit"
+                        mat-button
+                        (click)="onSubmit()"
+                        [disabled]="loginForm.invalid"
+                    >Login
+                    </button>
+                </div>
+            </div>
+        </mat-card-content>
+    </form>
+</mat-card>

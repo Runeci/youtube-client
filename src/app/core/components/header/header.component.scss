@@ -1,0 +1,58 @@
+.header .header-first-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header .header-second-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  height: 42px;
+  min-width: 42px;
+    max-width: 60px;
+    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-icon {
+  font-size: 36px;
+  height: 36px;
+  width: 36px;
+}
+
+.search {
+  display: flex;
+  gap: 10px;
+}
+
+.search-input {
+  max-width: 500px;
+  width: 100%;
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
